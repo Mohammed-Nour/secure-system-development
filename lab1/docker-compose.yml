@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: 22BS283-gitlab
+    restart: always
+    hostname: 'gitlab.test.local'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.test.local'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        nginx['http2_enabled'] = true
+        nginx['redirect_http_to_https'] = true
+        nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.test.local.crt"
+        nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.test.local.key"
+        gitlab_rails['registry_enabled'] = false
+        mattermost['enable'] = false
+        gitlab_pages['enable'] = false
+        gitlab_kas['enable'] = false
+        letsencrypt['enable'] = false
+    ports:
+      - '80:80'
+      - '443:443'
+      - '2222:22'
+    volumes:
+      - '/srv/gitlab/config:/etc/gitlab'
+      - '/srv/gitlab/logs:/var/log/gitlab'
+      - '/srv/gitlab/data:/var/opt/gitlab'
+      - '/etc/gitlab/ssl:/etc/gitlab/ssl'
+    shm_size: '256m'
