@@ -1,0 +1,392 @@
+Flawfinder version 2.0.19, (C) 2001-2019 David A. Wheeler.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 222
+Examining Damn_Vulnerable_C_Program/windows/WindowsDLL/DamnVulnerableHeader.h
+Examining Damn_Vulnerable_C_Program/windows/HarnessForWindowsDLL/dllTest2/dllTest2.cpp
+Examining Damn_Vulnerable_C_Program/windows/HarnessForWindowsDLL/dllTest2/DamnVulnerableHeader.h
+Examining Damn_Vulnerable_C_Program/imgRead.c
+Examining Damn_Vulnerable_C_Program/dvcp_patched.c
+Examining Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgRead.c
+Examining Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c
+Examining Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.h
+Examining Damn_Vulnerable_C_Program/linux/imgRead.c
+Examining Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c
+Examining Damn_Vulnerable_C_Program/linux/imgRead_socket.c
+Examining Damn_Vulnerable_C_Program/dvcp.c
+Examining Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c
+Examining Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c
+Examining Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c
+Examining Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c
+
+FINAL RESULTS:
+
+Damn_Vulnerable_C_Program/dvcp.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp.c:33:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/dvcp.c:58:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/dvcp.c:79:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/dvcp.c:85:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp.c:87:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/dvcp_patched.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp_patched.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp_patched.c:27:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/dvcp_patched.c:67:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/dvcp_patched.c:108:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/dvcp_patched.c:120:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/dvcp_patched.c:131:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/imgRead.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/imgRead.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/imgRead.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/imgRead.c:33:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/imgRead.c:58:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/imgRead.c:79:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/imgRead.c:85:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/imgRead.c:87:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:27:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:52:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:73:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:79:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_git/imgRead.c:81:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:20:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:52:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:71:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:77:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:79:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:33:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:58:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:79:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:85:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead_replication.c:87:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:27:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:52:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:73:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:79:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/libAFL/libafl_forkserver_fuzzer/imgRead.c:81:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:33:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:58:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:79:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:85:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.c:87:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.h:6:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/Damn_Vulnerable_C_lib/imgReadlib.h:9:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead.c:33:  [2] (misc) fopen:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (CWE-362).
+Damn_Vulnerable_C_Program/linux/imgRead.c:58:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead.c:79:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead.c:85:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead.c:87:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c:16:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c:19:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c:35:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c:56:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c:62:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_libfuzzer.c:64:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:23:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:26:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:35:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:102:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:123:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:129:  [2] (buffer) char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (CWE-119!/CWE-120). Perform bounds checking, use
+  functions that limit length, or ensure that the size is larger than the
+  maximum possible length.
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:131:  [2] (buffer) memcpy:
+  Does not check for buffer overflows when copying to destination (CWE-120).
+  Make sure destination can always hold the source data.
+Damn_Vulnerable_C_Program/libAFL/damn_vulnerable_c_program_shmem/imgRead.c:35:  [1] (buffer) strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (CWE-126).
+Damn_Vulnerable_C_Program/linux/imgRead_socket.c:74:  [1] (buffer) read:
+  Check buffer boundaries if used in a loop including recursive loops
+  (CWE-120, CWE-20).
+
+ANALYSIS SUMMARY:
+
+Hits = 84
+Lines analyzed = 1497 in approximately 0.04 seconds (40291 lines/second)
+Physical Source Lines of Code (SLOC) = 900
+Hits@level = [0]  50 [1]   2 [2]  82 [3]   0 [4]   0 [5]   0
+Hits@level+ = [0+] 134 [1+]  84 [2+]  82 [3+]   0 [4+]   0 [5+]   0
+Hits/KSLOC@level+ = [0+] 148.889 [1+] 93.3333 [2+] 91.1111 [3+]   0 [4+]   0 [5+]   0
+Dot directories skipped = 4 (--followdotdir overrides)
+Minimum risk level = 1
+
+Not every hit is necessarily a security vulnerability.
+You can inhibit a report by adding a comment in this form:
+// flawfinder: ignore
+Make *sure* it's a false positive!
+You can use the option --neverignore to show these.
+
+There may be other security vulnerabilities; review your code!
+See 'Secure Programming HOWTO'
+(https://dwheeler.com/secure-programs) for more information.
