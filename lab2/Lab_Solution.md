@@ -14,6 +14,8 @@ In this lab, you'll:
 
 ### 1.1 Bandit (Python)
 
+**[Link to Bandit logs of scanning](https://github.com/Mohammed-Nour/secure-system-development/blob/main/lab2/logs/bandit_scan.log)**
+
 ```sh
 python3 -m venv venv
 source venv/bin/activate
@@ -88,6 +90,8 @@ Running a Flask app with `debug=True` exposes detailed error messages and the We
 
 ### 1.2 Flawfinder (C)
 
+**[Link to Flawfinder logs of scanning](https://github.com/Mohammed-Nour/secure-system-development/blob/main/lab2/logs/flawfinder_scan.log)**
+
 ```sh
 pip install flawfinder
 git clone git@github.com:hardik05/Damn_Vulnerable_C_Program.git
@@ -124,6 +128,9 @@ The `memcpy` function is used to copy data, but if it's not properly checked, it
 
 ---
 
+**Level 3 (Medium Severity):**
+I didn't find any issue related to this level)
+
 **False positive:**
 
 ```log
@@ -139,6 +146,8 @@ One false-positive finding from the logs could be the warning related to the use
 
 ### 1.3 njsscan (NodeJS)
 
+**[Link to njsscan logs of scanning](https://github.com/Mohammed-Nour/secure-system-development/blob/main/lab2/logs/njsscan_scan.log)**
+
 ```sh
 pip install njsscan
 git clone git@github.com:appsecco/dvna.git
@@ -147,34 +156,7 @@ njsscan dvna/
 
 **INFO Severity:**
 
-```log
-╒═════════════╤═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╕
-│ RULE ID     │ cookie_session_default                                                                                                              │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ CWE         │ CWE-522: Insufficiently Protected Credentials                                                                                       │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ OWASP-WEB   │ A2: Broken Authentication                                                                                                           │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ DESCRIPTION │ Consider changing the default session cookie name. An attacker can use it to fingerprint the server and target attacks accordingly. │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ SEVERITY    │ INFO                                                                                                                                │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ FILES       │ ╒════════════════╤═════════════════════════════╕                                                                                    │
-│             │ │ File           │ dvna/server.js              │                                                                                    │
-│             │ ├────────────────┼─────────────────────────────┤                                                                                    │
-│             │ │ Match Position │ 9 - 3                       │                                                                                    │
-│             │ ├────────────────┼─────────────────────────────┤                                                                                    │
-│             │ │ Line Number(s) │ 23: 28                      │                                                                                    │
-│             │ ├────────────────┼─────────────────────────────┤                                                                                    │
-│             │ │ Match String   │ app.use(session({           │                                                                                    │
-│             │ │                │   secret: 'keyboard cat',   │                                                                                    │
-│             │ │                │   resave: true,             │                                                                                    │
-│             │ │                │   saveUninitialized: true,  │                                                                                    │
-│             │ │                │   cookie: { secure: false } │                                                                                    │
-│             │ │                │ }))                         │                                                                                    │
-│             │ ╘════════════════╧═════════════════════════════╛                                                                                    │
-╘═════════════╧═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╛
-```
+![alt text](screenshots/image-26.png)
 
 **Explanation:**  
 The default session cookie name could reveal information about the server, making it easier for an attacker to recognize and target specific vulnerabilities.  
@@ -185,34 +167,7 @@ The default session cookie name could reveal information about the server, makin
 
 **WARNING Severity:**
 
-```log
-╒═════════════╤═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╕
-│ RULE ID     │ cookie_session_no_secure                                                                                        │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ CWE         │ cwe-614                                                                                                         │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ OWASP-WEB   │ A2: Broken Authentication                                                                                       │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ DESCRIPTION │ Default session middleware settings: `secure` not set. It ensures the browser only sends the cookie over HTTPS. │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ SEVERITY    │ WARNING                                                                                                         │
-├─────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ FILES       │ ╒════════════════╤═════════════════════════════╕                                                                │
-│             │ │ File           │ dvna/server.js              │                                                                │
-│             │ ├────────────────┼─────────────────────────────┤                                                                │
-│             │ │ Match Position │ 9 - 3                       │                                                                │
-│             │ ├────────────────┼─────────────────────────────┤                                                                │
-│             │ │ Line Number(s) │ 23: 28                      │                                                                │
-│             │ ├────────────────┼─────────────────────────────┤                                                                │
-│             │ │ Match String   │ app.use(session({           │                                                                │
-│             │ │                │   secret: 'keyboard cat',   │                                                                │
-│             │ │                │   resave: true,             │                                                                │
-│             │ │                │   saveUninitialized: true,  │                                                                │
-│             │ │                │   cookie: { secure: false } │                                                                │
-│             │ │                │ }))                         │                                                                │
-│             │ ╘════════════════╧═════════════════════════════╛                                                                │
-╘═════════════╧═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╛
-```
+![alt text](screenshots/image-24.png)
 
 **Explanation:**  
 The `secure` flag on cookies ensures they are only sent over secure HTTPS connections. Without this flag, the cookie could be exposed during transmission over an insecure connection, making it vulnerable to interception by attackers.  
@@ -223,29 +178,7 @@ The `secure` flag on cookies ensures they are only sent over secure HTTPS connec
 
 **ERROR Severity:**
 
-```log
-╒═════════════╤═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╕
-│ RULE ID     │ node_xxe                                                                                                                          │
-├─────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ CWE         │ CWE-611: Improper Restriction of XML External Entity Reference                                                                    │
-├─────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ OWASP-WEB   │ A4: XML External Entities (XXE)                                                                                                   │
-├─────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ DESCRIPTION │ User controlled data in XML parsers can result in XML External or Internal Entity (XXE) Processing vulnerabilities                │
-├─────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ SEVERITY    │ ERROR                                                                                                                             │
-├─────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ FILES       │ ╒════════════════╤══════════════════════════════════════════════════════════════════════════════════════════════════════════════╕ │
-│             │ │ File           │ dvna/core/appHandler.js                                                                                      │ │
-│             │ ├────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤ │
-│             │ │ Match Position │ 18 - 111                                                                                                     │ │
-│             │ ├────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤ │
-│             │ │ Line Number(s) │ 235                                                                                                          │ │
-│             │ ├────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤ │
-│             │ │ Match String   │ var products = libxmljs.parseXmlString(req.files.products.data.toString('utf8'), {noent:true,noblanks:true}) │ │
-│             │ ╘════════════════╧══════════════════════════════════════════════════════════════════════════════════════════════════════════════╛ │
-╘═════════════╧═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╛
-```
+![alt text](screenshots/image-25.png)
 
 **Explanation:**  
 The vulnerability here is due to improper handling of XML data. An attacker can exploit a system by sending specially crafted XML that includes external entity references. These references can cause the system to process unintended data, leading to security issues like data leakage or remote code execution.  
@@ -369,7 +302,7 @@ Uploading an HTML file and intercepting the request in Burp Suite to modify the 
 ![alt text](screenshots/image-18.png)
 
 **Why Unrestricted File Upload is Dangerous:**
-Attackers can upload malicious files (e.g., scripts, executables) to execute arbitrary commands. To prevent this, validate file types, use server-side checks, and store uploads outside the web root with randomized names.
+Attackers can upload malicious files to deface a website, spread malware, or gain unauthorized access. This can lead to data breaches, phishing attacks, or even full system compromise. To prevent this, always validate file types, enforce server-side checks, limit upload permissions, and store files outside the web root with randomized names.
 
 ---
 
