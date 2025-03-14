@@ -28,9 +28,13 @@ HashMap* HashInit() {
 // Inserts PairValue into the map, if the value exists, increase ValueCount
 void HashAdd(HashMap *map, PairValue *value) {
     if (!map || !value) return;
+    PairValue* existing = HashFind(map, value->KeyName);
+    if (existing) {
+        existing->ValueCount++;
+        return;
+    }
     unsigned idx = HashIndex(value->KeyName);
-    if (map->data[idx]) 
-        value->Next = map->data[idx]->Next;
+    value->Next = map->data[idx]; 
 
     map->data[idx] = value;	
 }
@@ -50,6 +54,7 @@ PairValue* HashFind(HashMap *map, const char* key) {
 
 // Deletes the entry with the given key from the map
 void HashDelete(HashMap *map, const char* key) {
+    if (!map || !key) return;
     unsigned idx = HashIndex(key);
 
     for(PairValue* val = map->data[idx], *prev = NULL; val != NULL; prev = val, val = val->Next) {
