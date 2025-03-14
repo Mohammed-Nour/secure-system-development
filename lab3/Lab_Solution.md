@@ -202,6 +202,10 @@ valgrind --leak-check=yes ./program2
 
 ![Fixed Valgrind Output for program2](screenshots/image-8.png)
 
+#### 8. Different output with Valgring and without it
+
+- Without Valgrind, the OS may reuse freed memory, leading to incorrect output. Valgrind delays memory reuse, so values may still appear correct. The issue is **use-after-free**, causing undefined behavior. The fix is to free memory **after** using it.
+
 [Updated program2.c](https://github.com/Mohammed-Nour/secure-system-development/blob/main/lab3/programs/program2.c)
 
 ---
@@ -357,7 +361,9 @@ valgrind --leak-check=yes ./program4
 
 #### 6. Propose Fixes `program4.c`
 
-- **Fix:** Remove the `message` array and initialize `ret` with the string value directly.
+- **Fix:** The issue in the original code is returning a pointer to a local stack variable, which leads to **undefined behavior**. Instead of using a local array, allocate memory dynamically on the heap using `malloc`.  
+- **Safer Fix:** Use `malloc` to allocate memory and `strncpy` to safely copy the string, ensuring memory is properly managed.  
+- **Ensure** the allocated memory is freed after use to prevent memory leaks.
 
 #### 7. Verify Fixes `program4.c`
 
