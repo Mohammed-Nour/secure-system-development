@@ -39,11 +39,13 @@ docker run -d -p 127.0.0.1:80:80 vulnerables/web-dvwa
 ### Fuzz Endpoints using `big.txt`
 
 ```bash
-ffuf -u http://localhost:80/FUZZ -w ./SecLists-master/Discovery/Web-Content/big.txt
+ffuf -r -u http://localhost:80/FUZZ -w ./SecLists-master/Discovery/Web-Content/big.txt
 ```
 
 - `-u`: Target URL where `FUZZ` is replaced by each word  
 - `-w`: Wordlist path  
+- `-r`: check the flow of 3xx redirections.  
+
 ![ffuf big.txt](screenshots/image-5.png)
 
 #### Observations
@@ -51,16 +53,15 @@ ffuf -u http://localhost:80/FUZZ -w ./SecLists-master/Discovery/Web-Content/big.
 ```log
 .htpasswd               [Status: 403, Size: 293, Words: 22, Lines: 12]
 .htaccess               [Status: 403, Size: 293, Words: 22, Lines: 12]
-config                  [Status: 301, Size: 307, Words: 20, Lines: 10]
-docs                    [Status: 301, Size: 305, Words: 20, Lines: 10]
-external                [Status: 301, Size: 309, Words: 20, Lines: 10]
+config                  [Status: 200, Size: 1166, Words: 76, Lines: 18]
+docs                    [Status: 200, Size: 1134, Words: 74, Lines: 18]
+external                [Status: 200, Size: 1136, Words: 76, Lines: 18]
 favicon.ico             [Status: 200, Size: 1405, Words: 5, Lines: 2]
 robots.txt              [Status: 200, Size: 26, Words: 3, Lines: 2]
 server-status           [Status: 403, Size: 297, Words: 22, Lines: 12]
 ```
 
-- `200`: Accessible → `robots.txt`, `favicon.ico`
-- `301`: Redirected → `config`, `docs`, `external`
+- `200`: Accessible → `robots.txt`, `favicon.ico`, `config`, `docs`, `external`
 - `403`: Forbidden (interesting) → `.htaccess`, `.htpasswd`, `server-status`
 
 ---
@@ -68,21 +69,22 @@ server-status           [Status: 403, Size: 297, Words: 22, Lines: 12]
 ### What file extensions are available for `index`?
 
 ```bash
-ffuf -u http://localhost:80/index.FUZZ -w ./SecLists-master/Discovery/Web-Content/web-extensions.txt
+ffuf -r -u http://localhost:80/indexFUZZ -w ./SecLists-master/Discovery/Web-Content/web-extensions.txt
 ```
 
 ![index extensions](screenshots/image-6.png)
 
 #### Result
 
-- `index.php` found, but returns `403` (forbidden)
+- `index.php` found, and returns `200`
+- `index.phps` found, but returns `403` (forbidden)
 
 ---
 
 ### Directory Fuzzing using `raft-medium-directories.txt`
 
 ```bash
-ffuf -u http://localhost:80/FUZZ -w ./SecLists-master/Discovery/Web-Content/raft-medium-directories.txt
+ffuf -r -u http://localhost:80/FUZZ -w ./SecLists-master/Discovery/Web-Content/raft-medium-directories.txt
 ```
 
 ![raft directories](screenshots/image-7.png)
@@ -90,13 +92,14 @@ ffuf -u http://localhost:80/FUZZ -w ./SecLists-master/Discovery/Web-Content/raft
 #### Observations1
 
 ```log
-config        [301]
-docs          [301]
-external      [301]
-server-status [403]
+docs                    [Status: 200, Size: 1134, Words: 74, Lines: 18]
+config                  [Status: 200, Size: 1166, Words: 76, Lines: 18]
+external                [Status: 200, Size: 1136, Words: 76, Lines: 18]
+server-status           [Status: 403, Size: 297, Words: 22, Lines: 12]
+
 ```
 
-- `301`: `config`, `docs`, `external` → Redirected
+- `200`: `config`, `docs`, `external`
 - `403`: `server-status` → Forbidden access (interesting)
 
 ---
@@ -146,6 +149,9 @@ py-afl-fuzz -i input -o output -- /usr/bin/python3 main.py
 ### Let It Run (Detect Crash & Hang)
 
 ![hang and crash detected](screenshots/image-10.png)
+
+running it for around 1 min
+![run fuzz](screenshots/image-11.png)
 
 ---
 
